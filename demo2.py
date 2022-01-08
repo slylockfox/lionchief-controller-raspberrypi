@@ -11,6 +11,7 @@ chief = bluetooth.BTLEDevice("44:A6:E5:48:7F:73")
 # chief.set_bell_pitch(1)
 chief.connect()
 # Gracefully start or stop
+speed=0
 def ramp(start_speed, end_speed):
     speed = start_speed
     while speed != end_speed:
@@ -22,12 +23,44 @@ def ramp(start_speed, end_speed):
         time.sleep(.2)
     chief.set_speed(end_speed)
 
+def connectNotify():
+    chief.set_horn(True)
+    time.sleep(.1)
+    chief.set_horn(False)
+    time.sleep(.1)
+    chief.set_horn(True)
+    time.sleep(.1)
+    chief.set_horn(False)
+
+#connectNotify()
+
 while True:
+
+
+    command = input("Enter your command ")
+    if(command == 'q'):
+        chief.stop()
+        break
+    if(command == 'h'):
+        chief.set_horn(True)
+        time.sleep(1)
+        chief.set_horn(False)
+    if(command == 'f'):
+        if(speed == 0):
+            speed = 2
+        chief.ramp(speed,speed+1)
+        speed+=1
+        
+        print("Current speed: " , speed)
+    if(command == 'b'):
+        chief.ramp(speed,0)
+        speed=0
+        
     # Let the conductor say something
     # chief.speak()
     # # Have to give adequate to speak, otherwise horn
     # # will cut off the conductor's voice
-    time.sleep(1)
+    # time.sleep(1)
 
     # # Time to go
  #   chief.set_horn(True)
@@ -42,11 +75,24 @@ while True:
    # time.sleep(2)
 
 
-    chief.set_reverse(False)
+    #chief.set_reverse(False)
 
-    chief.ramp(0,11)
+    #chief.ramp(0,11)
 
-   # time.sleep(2)
+    # chief.speak(1) #this is the poloar express
+
+    # time.sleep(2)
+    # chief.speak(2) #all aboard
+    # time.sleep(2)
+    # chief.speak(3) #well you coming
+    # time.sleep(2)
+    # chief.speak(4) #tickets.  #tickets please
+    # time.sleep(2)
+    # chief.speak(5) #The first gift of christmas
+    # time.sleep(2)
+    # chief.speak(6) # I am the king of the north pole
+    # time.sleep(2)
+   
 
 #    chief.set_horn(True)
 
@@ -56,9 +102,9 @@ while True:
     # chief.set_horn(False)
 
     # # Keep training along
-    time.sleep(10)
+    # time.sleep(10)
 
-    chief.ramp(9,0)
+    # chief.ramp(0,9)
 
     # # Reverse 
     # ramp(6,0)
@@ -79,5 +125,5 @@ while True:
     # ramp(6,0)
     # time.sleep(1)
     # chief.set_bell(False)
-    time.sleep(180)
+    # time.sleep(180)
 

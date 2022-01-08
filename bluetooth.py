@@ -364,8 +364,9 @@ class BTLEDevice(object):
             time.sleep(.2)
         self._set_speed(end_speed)
 
-    def speak(self):
-        self._send_cmd([0x4d, 0, 0])    
+    #zero is random
+    def speak(self, phrase=0):
+        self._send_cmd([0x4d, phrase, 0])    
 
     def set_reverse(self, on):
         self._send_cmd([0x46, 0x02 if on else 0x01])   
