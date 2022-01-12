@@ -399,6 +399,26 @@ class BTLEDevice(object):
 
     def set_engine_volume(self, volumn):
         self._send_cmd([0x44,0x04,volumn])
+    
+    # def set_horn_pitch(self,pitch):
+    #     self._send_cmd([0x44,0x01,0x0e,pitch])
+
+    # def set_bell_pitch(self, pitch):
+    #     self._send_cmd([0x44,0x02,0x0e,pitch])
+
+    def set_bell_pitch(self, pitch):
+        pitches = [0xfe, 0xff, 0, 1, 2]
+        if pitch<0 or pitch >=len(pitches):
+            print("Bell pitch should be between 0 and "+ str(pitch))
+            return
+        self._send_cmd([0x44, 0x02, 0x0e, pitches[pitch]])
+
+    def set_horn_pitch(self, pitch):
+        pitches = [0xfe, 0xff, 0, 1, 2]
+        if pitch<0 or pitch >=len(pitches):
+            print("horn pitch should be between 0 and "+ str(pitch))
+            return
+        self._send_cmd([0x44, 0x01, 0x0e, pitches[pitch]])
 
 
 

@@ -39,6 +39,39 @@ bell pitch:
 horn pitch:
 top bluetooth speed:
 
+a=10
+b=11
+c=12
+d=13
+e=14
+
+Horn Pitch
+44 01 0e  02
+44 01 0e  01
+Value: 0044010e ffae
+Value: 0044010e feaf
+
+
+Value: 0044010e ffae
+Value: 0044010e 00ad
+
+
+
+BELL pitch?
+Value: 0044020e 01 ab ==3
+Value: 0044020e 02 aa ==4
+Value: 0044020e fe ae  ==0
+
+
+Value: 0044020e ff ad
+Value: 0044020e 00 ac
+Value: 0044020e ff ad  ==1
+
+Value: 0044020e 00 ac
+Value: 0044020e ff ad
+
+
+
 
 If the first parameter of the speech command is 0, the saying will be random.
 Otherwise, each value corresponds to a specific saying. Not sure what the

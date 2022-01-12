@@ -7,8 +7,8 @@ logging.basicConfig()
 logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 # Replace this mac address with the one
 # belonging to your train
-chief = bluetooth.BTLEDevice("44:A6:E5:48:7F:73") #steam engine
-#chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
+#chief = bluetooth.BTLEDevice("44:A6:E5:48:7F:73") #steam engine
+chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
 
 # chief.set_bell_pitch(1)
 chief.connect()
@@ -85,6 +85,25 @@ while True:
         chief.bell(True)
         time.sleep(2)
         chief.bell(False)
+
+
+    if(command == 'bp'):
+        bpcommand=input("enter bell pitch")
+        chief.set_bell_pitch(int(bpcommand))
+        chief.bell(True)
+        time.sleep(2)
+        chief.bell(False)
+    
+    if(command == 'hp'):
+        print("horn pitch 0,1,2,3,4")
+        print("2 is default")
+        hpcommand=input("enter HORN pitch ")
+        chief.set_horn_pitch(int(hpcommand))
+        chief.set_horn(True)
+        time.sleep(2)
+        chief.set_horn(False)
+    
+
     # Let the conductor say something
     # chief.speak()
     # # Have to give adequate to speak, otherwise horn
