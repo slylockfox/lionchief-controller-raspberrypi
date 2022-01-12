@@ -368,6 +368,9 @@ class BTLEDevice(object):
     def speak(self, phrase=0):
         self._send_cmd([0x4d, phrase, 0])    
 
+    def bell(self, on):
+        self._send_cmd([0x47, 1 if on else 0])
+
     def set_reverse(self, on):
         self._send_cmd([0x46, 0x02 if on else 0x01])   
 
@@ -381,6 +384,22 @@ class BTLEDevice(object):
         values.append(checksum)
         self.char_write(0x25, bytes(values), True)
         # self._device.char_write(25, bytes(values), TRUE);
+
+    def set_over_volume(self, volumn):
+        self._send_cmd([0x4c,volumn])
+
+    def set_bell_volume(self, volumn):
+        self._send_cmd([0x44,0x02,volumn])
+
+    def set_horn_volume(self, volumn):
+        self._send_cmd([0x44,0x01,volumn])
+
+    def set_speech_volume(self, volumn):
+        self._send_cmd([0x44,0x03,volumn])
+
+    def set_engine_volume(self, volumn):
+        self._send_cmd([0x44,0x04,volumn])
+
 
 
 def le_scan(sudo_password=None, timeout=5):

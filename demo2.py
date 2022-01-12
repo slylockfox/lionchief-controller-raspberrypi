@@ -7,7 +7,9 @@ logging.basicConfig()
 logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 # Replace this mac address with the one
 # belonging to your train
-chief = bluetooth.BTLEDevice("44:A6:E5:48:7F:73")
+chief = bluetooth.BTLEDevice("44:A6:E5:48:7F:73") #steam engine
+#chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
+
 # chief.set_bell_pitch(1)
 chief.connect()
 # Gracefully start or stop
@@ -55,7 +57,34 @@ while True:
     if(command == 'b'):
         chief.ramp(speed,0)
         speed=0
-        
+
+    if(command =='v'):
+        vcommand=input("enter Volume: ")
+        chief.set_over_volume(int(vcommand))
+    
+    if(command == 'ev'):
+        ecommand=input("enter engine Volumne: ")
+        chief.set_engine_volume(int(ecommand))
+
+    if(command == 'hv'):
+        ecommand=input("enter horn Volumne: ")
+        chief.set_horn_volume(int(ecommand))
+
+    if(command == 'sv'):
+        ecommand=input("enter speech Volumne: ")
+        chief.set_speech_volume(int(ecommand))
+
+    if(command == 'bv'):
+        ecommand=input("enter bell Volumne: ")
+        chief.set_bell_volume(int(ecommand))
+
+    if(command == 's'):
+        chief.speak()
+
+    if(command == 'd'):
+        chief.bell(True)
+        time.sleep(2)
+        chief.bell(False)
     # Let the conductor say something
     # chief.speak()
     # # Have to give adequate to speak, otherwise horn

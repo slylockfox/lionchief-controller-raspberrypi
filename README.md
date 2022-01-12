@@ -28,6 +28,18 @@ Set speed : `45 <00-1f>`
 Forward   : `46 01`  
 Reverse   : `46 02`  
 
+
+Overall Volume : `4C XX`  0-7
+engine volumn: : `44 04 XX` 0-15
+horn volumn:  `44 01 XX`
+bell volumn: `44 02 XX` 
+speach volun: `44 03 XX`
+
+bell pitch:
+horn pitch:
+top bluetooth speed:
+
+
 If the first parameter of the speech command is 0, the saying will be random.
 Otherwise, each value corresponds to a specific saying. Not sure what the
 second parameter does.
