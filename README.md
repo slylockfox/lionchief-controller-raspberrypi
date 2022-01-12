@@ -27,13 +27,11 @@ Speech    : `4d XX 00`
 Set speed : `45 <00-1f>`  
 Forward   : `46 01`  
 Reverse   : `46 02`  
-
-
-Overall Volume : `4C XX`  0-7
-engine volumn: : `44 04 XX` 0-15
-horn volumn:  `44 01 XX`
-bell volumn: `44 02 XX` 
-speach volun: `44 03 XX`
+Overall Volume: `4C XX`  0-7  
+engine volumn: `44 04 XX` 0-15  
+horn volumn:  `44 01 XX`  
+bell volumn: `44 02 XX`    
+speach volumn: `44 03 XX` 
 
 bell pitch:
 horn pitch:
