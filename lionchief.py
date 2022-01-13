@@ -26,7 +26,11 @@ class LionChief(object):
     def _set_speed(self, speed):
         self._send_cmd([0x45, speed])
 
-    def ramp(self, start_speed, end_speed):
+    def ramp(self,start_speed,end_speed):
+        x=threading.Thread(target=self.ramp_thread,args=(start_speed,end_speed))
+        x.start()
+
+    def ramp_thread(self, start_speed, end_speed):
         speed = start_speed
         while speed != end_speed:
             self._set_speed(speed)
