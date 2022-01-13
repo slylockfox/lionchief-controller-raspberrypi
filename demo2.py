@@ -1,5 +1,6 @@
 #from bluetooth import BTLEDevice
-import bluetooth
+# import bluetooth
+import lionchief
 import time
 import logging
 
@@ -8,7 +9,9 @@ logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 # Replace this mac address with the one
 # belonging to your train
 #chief = bluetooth.BTLEDevice("44:A6:E5:48:7F:73") #steam engine
-chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
+#chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
+
+chief = lionchief.LionChief("44:A6:E5:35:54:88")
 
 # chief.set_bell_pitch(1)
 chief.connect()
