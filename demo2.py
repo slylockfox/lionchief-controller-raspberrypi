@@ -44,7 +44,7 @@ while True:
 
     command = input("Enter your command ")
     if(command == 'q'):
-        chief.stop()
+        chief.quit()
         break
     if(command == 'h'):
         chief.set_horn(True)

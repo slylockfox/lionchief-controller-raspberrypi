@@ -18,6 +18,7 @@ class LionChief(object):
 
     def connect(self):
         self._blue_connection=bluetooth.BTLEDevice(self._mac_address)
+        self._blue_connection.connect()
 
     def set_horn(self, on):
         self._send_cmd([0x48, 1 if on else 0])
