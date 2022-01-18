@@ -3,6 +3,7 @@ import bluetooth
 import time
 import threading
 
+
 # UUID25 = "08590f7e-db05-467e-8757-72f6faeb13d4"
 
 
@@ -15,16 +16,35 @@ class LionChief(object):
         
         self._mac_address = mac_address
         self._blue_connection = None
+        self.currentSpeed = 0
 
     def connect(self):
-        self._blue_connection=bluetooth.BTLEDevice(self._mac_address)
-        self._blue_connection.connect()
+        connected=False
+        maxAttempt=5
+        i=0
+        while(connected==False and i< maxAttempt):
+
+            try:
+                self._blue_connection=bluetooth.BTLEDevice(self._mac_address)
+                self._blue_connection.connect()
+        
+            except Exception as e:
+                print(e)
+                connected=False
+                i+=1
+                continue
+            connected=True
+        
+        if(connected ==False):
+            raise bluetooth.NotConnectedError()
+
 
     def set_horn(self, on):
         self._send_cmd([0x48, 1 if on else 0])
 
     def _set_speed(self, speed):
         self._send_cmd([0x45, speed])
+        self.currentSpeed = speed
 
     def ramp(self,start_speed,end_speed):
         x=threading.Thread(target=self.ramp_thread,args=(start_speed,end_speed))

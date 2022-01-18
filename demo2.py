@@ -3,6 +3,7 @@
 import lionchief
 import time
 import logging
+import sys
 
 logging.basicConfig()
 logging.getLogger('bluetooth').setLevel(logging.DEBUG)
@@ -14,19 +15,35 @@ logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 chief = lionchief.LionChief("44:A6:E5:35:54:88")
 
 # chief.set_bell_pitch(1)
-chief.connect()
+try:
+    chief.connect()
+except Exception as e:
+    print(e)
+    sys.exit(0)
 # Gracefully start or stop
 speed=0
-def ramp(start_speed, end_speed):
-    speed = start_speed
-    while speed != end_speed:
-        chief.set_speed(speed)
-        if speed > end_speed:
-            speed -= 1
-        else:
-            speed += 1
-        time.sleep(.2)
-    chief.set_speed(end_speed)
+reverse = False
+
+def eSpeed(newSpeed,eBrake = False):
+    global speed
+    if(eBrake == False):
+        chief.ramp(speed,newSpeed)
+        speed = newSpeed
+    else:
+        chief._set_speed(0)
+        speed = 0
+    # chief._set_speed(speed)
+
+# def ramp(start_speed, end_speed):
+#     speed = start_speed
+#     while speed != end_speed:
+#         chief.set_speed(speed)
+#         if speed > end_speed:
+#             speed -= 1
+#         else:
+#             speed += 1
+#         time.sleep(.2)
+#     chief.set_speed(end_speed)
 
 def connectNotify():
     chief.set_horn(True)
@@ -105,6 +122,23 @@ while True:
         chief.set_horn(True)
         time.sleep(2)
         chief.set_horn(False)
+
+    if(command == 'eb'):
+        eSpeed(0, True)
+
+    if(command == 'ss'):
+        sscommand=input("enter a speed: ")
+        eSpeed(int(sscommand))
+
+    if(command == 'cd'):
+        if(reverse):
+            reverse = False
+        else:
+            reverse = True
+        chief.set_reverse(reverse)
+        eSpeed(speed)
+        
+        
     
 
     # Let the conductor say something
