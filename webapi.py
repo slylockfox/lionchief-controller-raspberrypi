@@ -14,9 +14,14 @@ logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 
 chief = lionchief.LionChief("44:A6:E5:35:54:88")
 
+# speed = 0
+
 class LionApi(object):
+    # speed = 0
     def __init__(self):
-        online=True
+        self.online=True
+        self._speed=0
+        self._reverse = False
 
     def start(self):
         try:
@@ -25,13 +30,26 @@ class LionApi(object):
             print(e)
             sys.exit(0)
 
-    def go(self):
-        chief.ramp(0,15)
+    def go(self,newSpeed=0):
+        # global speed
+        chief.ramp(self._speed, newSpeed)
+        self._speed = newSpeed
 
     def horn(self):
         chief.set_horn(True)
         time.sleep(.5)
         chief.set_horn(False)
+
+    def reverse(self):
+        chief.set_reverse(True)
+        print('going in reverse')
+        self._reverse = True
+        self._speed = 0
+    
+    def forward(self):
+        chief.set_reverse(False)
+        self._reverse = False
+        self._speed = 0
 
 
 
