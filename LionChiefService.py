@@ -40,6 +40,22 @@ class LionApi(object):
         time.sleep(.5)
         chief.set_horn(False)
 
+    def hornTwil(self):
+        chief.set_horn_pitch(0)
+        chief.set_horn(True)
+        time.sleep(.3)
+        # chief.set_horn_pitch(1)
+        # time.sleep(.05)
+        # chief.set_horn_pitch(2)
+        # time.sleep(.05)
+        # chief.set_horn_pitch(3)
+        # time.sleep(.05)
+        chief.set_horn_pitch(4)
+        time.sleep(2)
+        chief.set_horn(False)
+
+
+
     def reverse(self):
         chief.set_reverse(True)
         print('going in reverse')

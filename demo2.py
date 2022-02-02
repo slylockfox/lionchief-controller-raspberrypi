@@ -9,10 +9,10 @@ logging.basicConfig()
 logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 # Replace this mac address with the one
 # belonging to your train
-#chief = bluetooth.BTLEDevice("44:A6:E5:48:7F:73") #steam engine
+chief = lionchief.LionChief("44:A6:E5:48:7F:73") #steam engine
 #chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
 
-chief = lionchief.LionChief("44:A6:E5:35:54:88")
+# chief = lionchief.LionChief("44:A6:E5:35:54:88")
 
 # chief.set_bell_pitch(1)
 try:
@@ -120,6 +120,20 @@ while True:
         hpcommand=input("enter HORN pitch ")
         chief.set_horn_pitch(int(hpcommand))
         chief.set_horn(True)
+        time.sleep(2)
+        chief.set_horn(False)
+
+    if(command == 't'):
+        chief.set_horn_pitch(2)
+        chief.set_horn(True)
+        time.sleep(.7)
+        # chief.set_horn_pitch(1)
+        # time.sleep(.05)
+        # chief.set_horn_pitch(2)
+        # time.sleep(.05)
+        chief.set_horn_pitch(3)
+        time.sleep(.03)
+        chief.set_horn_pitch(4)
         time.sleep(2)
         chief.set_horn(False)
 
