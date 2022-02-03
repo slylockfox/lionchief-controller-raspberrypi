@@ -32,10 +32,10 @@ Set speed : `45 <00-1f>`
 Forward   : `46 01`  
 Reverse   : `46 02`  
 Overall Volume: `4C XX`  0-7  
-engine volumn: `44 04 XX` 0-15  
-horn volumn:  `44 01 XX`  
-bell volumn: `44 02 XX`    
-speach volumn: `44 03 XX` 
+engine Volume: `44 04 XX` 0-15  
+horn Volume:  `44 01 XX`  
+bell Volume: `44 02 XX`    
+speach Volume: `44 03 XX` 
 
 bell pitch: `44 01 0e XX`  
 -2,-1,0,1,2 NOTE Negative hex values are:
