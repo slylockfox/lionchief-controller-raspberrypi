@@ -47,6 +47,14 @@ If the first parameter of the speech command is 0, the saying will be random.
 Otherwise, each value corresponds to a specific saying. Not sure what the
 second parameter does.
 
+1225 Speech codes (Polar Express)
+1 - this is the poloar express
+2 - all aboard
+3 - well you coming
+4 - tickets.  #tickets please
+5 - The first gift of christmas
+6 - I am the king of the north pole
+
 ## Usage
 Demo usage can be found in `demo2.py`. Make sure to change the MAC address
 (how to get MAC Address...more to come on that)
