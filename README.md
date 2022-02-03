@@ -1,3 +1,7 @@
+# LOTS OF TODO.  This looks a bit confusing, but this will be cleaned up and broken into a service that command line will work with and a WEB api.
+### todo singletons
+### todo web authentication using Microsoft Account
+
 # LionChief Controller
 Script for controlling a LionChief train via Bluetooth
 
@@ -33,43 +37,11 @@ horn volumn:  `44 01 XX`
 bell volumn: `44 02 XX`    
 speach volumn: `44 03 XX` 
 
-bell pitch:
-horn pitch:
-top bluetooth speed:
+bell pitch: `44 01 0e XX`  
+-2,-1,0,1,2 NOTE Negative hex values are:
 
-a=10
-b=11
-c=12
-d=13
-e=14
-
-Horn Pitch
-44 01 0e  02
-44 01 0e  01
-Value: 0044010e ffae
-Value: 0044010e feaf
-
-
-Value: 0044010e ffae
-Value: 0044010e 00ad
-
-
-
-BELL pitch?
-Value: 0044020e 01 ab ==3
-Value: 0044020e 02 aa ==4
-Value: 0044020e fe ae  ==0
-
-
-Value: 0044020e ff ad
-Value: 0044020e 00 ac
-Value: 0044020e ff ad  ==1
-
-Value: 0044020e 00 ac
-Value: 0044020e ff ad
-
-
-
+horn pitch: `44 02 0e XX`  
+-2,-1,0,1,2 NOTE Negative hex values are:
 
 If the first parameter of the speech command is 0, the saying will be random.
 Otherwise, each value corresponds to a specific saying. Not sure what the
