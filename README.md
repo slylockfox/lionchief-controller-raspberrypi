@@ -37,10 +37,10 @@ horn Volume:  `44 01 XX`
 bell Volume: `44 02 XX`    
 speach Volume: `44 03 XX` 
 
-bell pitch: `44 01 0e XX`  
+bell pitch: `44 02 0e XX`  
 -2,-1,0,1,2 NOTE Negative hex values are:
 
-horn pitch: `44 02 0e XX`  
+horn pitch: `44 01 0e XX`  
 -2,-1,0,1,2 NOTE Negative hex values are:
 
 If the first parameter of the speech command is 0, the saying will be random.
