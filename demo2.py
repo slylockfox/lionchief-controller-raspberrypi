@@ -11,9 +11,9 @@ logging.basicConfig()
 logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 # Replace this mac address with the one
 # belonging to your train
-chief = lionchief.LionChief("44:A6:E5:48:7F:73") #steam engine
+#chief = lionchief.LionChief("44:A6:E5:48:7F:73") #steam engine
 #chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
-
+chief = lionchief.LionChief("D0:EC:B7:01:5E:DE") #steam engine
 
 # chief.set_bell_pitch(1)
 try:
@@ -44,8 +44,11 @@ def connectNotify():
     chief.set_horn(False)
 
 
-while True:
+chief.bell(True)
+time.sleep(2)
+chief.bell(False)
 
+while True:
 
     command = input("Enter your command ")
     if(command == 'q'):
