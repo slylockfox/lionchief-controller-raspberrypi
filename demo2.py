@@ -2,6 +2,7 @@
 
 import lionchief
 import time
+import datetime
 import logging
 import sys
 
@@ -43,10 +44,27 @@ def connectNotify():
     time.sleep(.1)
     chief.set_horn(False)
 
+def sleepUntilTopOfHour():
+    t = datetime.datetime.today()
+    future = datetime.datetime(t.year, t.month, t.day, t.hour, t.minute+1)
+    if t.timestamp() > future.timestamp():
+        future += datetime.timedelta(days=1)
+    time.sleep((future-t).total_seconds())
 
-chief.bell(True)
-time.sleep(2)
-chief.bell(False)
+#chief.set_engine_volume(8)
+#chief.bell(True)
+#time.sleep(2)
+#chief.bell(False)
+#time.sleep(10)
+#chief.set_engine_volume(0)
+while True:
+    chief.set_engine_volume(8)
+    chief.bell(True)
+    time.sleep(2)
+    chief.bell(False)
+    time.sleep(10)
+    chief.set_engine_volume(0)
+    sleepUntilTopOfHour()
 
 while True:
 
