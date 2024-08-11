@@ -64,7 +64,8 @@ while True:
     chief.bell(False)
     time.sleep(10)
     chief.set_engine_volume(0)
-    sleepUntilTopOfHour()
+    #sleepUntilTopOfHour()
+    time.sleep(60*60)
 
 while True:
 
