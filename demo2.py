@@ -46,7 +46,7 @@ def connectNotify():
 
 def sleepUntilTopOfHour():
     t = datetime.datetime.today()
-    future = datetime.datetime(t.year, t.month, t.day, t.hour, t.minute+1)
+    future = datetime.datetime(t.year, t.month, t.day, t.hour+1, 0)
     if t.timestamp() > future.timestamp():
         future += datetime.timedelta(days=1)
     time.sleep((future-t).total_seconds())
