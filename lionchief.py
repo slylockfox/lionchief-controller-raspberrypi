@@ -20,7 +20,7 @@ class LionChief(object):
 
     def connect(self):
         connected=False
-        maxAttempt=5
+        maxAttempt=50
         i=0
         while(connected==False and i< maxAttempt):
 
