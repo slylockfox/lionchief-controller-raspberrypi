@@ -58,12 +58,14 @@ def sleepUntilTopOfHour():
 #time.sleep(10)
 #chief.set_engine_volume(0)
 while True:
+    print ("Awake...")
     chief.set_engine_volume(8)
     chief.bell(True)
     time.sleep(2)
     chief.bell(False)
     time.sleep(10)
     chief.set_engine_volume(0)
+    print ("Sleeping...")
     #sleepUntilTopOfHour()
     time.sleep(60*60)
 
