@@ -51,23 +51,17 @@ def sleepUntilTopOfHour():
         future += datetime.timedelta(days=1)
     time.sleep((future-t).total_seconds())
 
-#chief.set_engine_volume(8)
-#chief.bell(True)
-#time.sleep(2)
-#chief.bell(False)
-#time.sleep(10)
-#chief.set_engine_volume(0)
 while True:
-    print ("Awake...")
+    print ("Awake...", flush=True)
     chief.set_engine_volume(8)
     chief.bell(True)
     time.sleep(2)
     chief.bell(False)
     time.sleep(10)
     chief.set_engine_volume(0)
-    print ("Sleeping...")
-    #sleepUntilTopOfHour()
-    time.sleep(60*60)
+    print ("Sleeping...", flush=True)
+    sleepUntilTopOfHour()
+    #time.sleep(60*60)
 
 while True:
 

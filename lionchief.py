@@ -2,6 +2,7 @@ from contextlib import nullcontext
 import bluetooth
 import time
 import threading
+import os
 
 
 # UUID25 = "08590f7e-db05-467e-8757-72f6faeb13d4"
@@ -19,24 +20,29 @@ class LionChief(object):
         self.currentSpeed = 0
 
     def connect(self):
+        print("Bluetooth connecting...", flush=True)
         connected=False
-        maxAttempt=50
+        maxAttempt=3
         i=0
         while(connected==False and i< maxAttempt):
 
+            print ("Bluetooth connection attempt " + str(i), flush=True)
             try:
                 self._blue_connection=bluetooth.BTLEDevice(self._mac_address)
                 self._blue_connection.connect()
         
             except Exception as e:
-                print(e)
+                print(e, flush=True)
                 connected=False
                 i+=1
                 continue
             connected=True
         
         if(connected ==False):
-            raise bluetooth.NotConnectedError()
+            #raise bluetooth.NotConnectedError()
+            os.system('sudo reboot')
+
+        print ("Bluetooth connected", flush=True)
 
 
     def set_horn(self, on):
