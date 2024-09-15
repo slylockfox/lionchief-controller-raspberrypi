@@ -59,6 +59,8 @@ while True:
     chief.bell(False)
     time.sleep(10)
     chief.set_engine_volume(0)
+    time.sleep(10)
+    chief.set_engine_volume(0)
     print ("Sleeping...", flush=True)
     sleepUntilTopOfHour()
     #time.sleep(60*60)
