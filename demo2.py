@@ -52,15 +52,18 @@ def sleepUntilTopOfHour():
     time.sleep((future-t).total_seconds())
 
 while True:
-    print ("Awake...", flush=True)
-    chief.set_engine_volume(8)
-    chief.bell(True)
-    time.sleep(2)
-    chief.bell(False)
-    time.sleep(10)
-    chief.set_engine_volume(0)
-    time.sleep(10)
-    chief.set_engine_volume(0)
+    try:
+      print ("Awake...", flush=True)
+      chief.set_engine_volume(8)
+      chief.bell(True)
+      time.sleep(2)
+      chief.bell(False)
+      time.sleep(10)
+      chief.set_engine_volume(0)
+      time.sleep(10)
+      chief.set_engine_volume(0)
+    except:
+      os.system('sudo reboot')
     print ("Sleeping...", flush=True)
     sleepUntilTopOfHour()
     #time.sleep(60*60)

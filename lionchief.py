@@ -22,7 +22,7 @@ class LionChief(object):
     def connect(self):
         print("Bluetooth connecting...", flush=True)
         connected=False
-        maxAttempt=3
+        maxAttempt=1
         i=0
         while(connected==False and i< maxAttempt):
 
