@@ -1,10 +1,9 @@
-
-
 import lionchief
 import time
 import datetime
 import logging
 import sys
+import threading
 
 #This demo class will be split into a common service soon.  This will soon be commandline only interface.
 
@@ -21,7 +20,7 @@ try:
     chief.connect()
 except Exception as e:
     print(e)
-    sys.exit(0)
+    os.system('sudo reboot')
 # Gracefully start or stop
 speed=0
 reverse = False
@@ -51,8 +50,19 @@ def sleepUntilTopOfHour():
         future += datetime.timedelta(days=1)
     time.sleep((future-t).total_seconds())
 
+def watchdog():
+    global lion_working
+    time.sleep(60)
+    if not lion_working:
+        os.system('sudo reboot')
+    print ("Watchdog ending...", flush=True)
+
+lion_working = False
 while True:
     try:
+      print ("Starting watchdog...", flush=True)
+      dog_thread = threading.Thread(target = watchdog)
+      dog_thread.start()
       print ("Awake...", flush=True)
       chief.set_engine_volume(8)
       chief.bell(True)
@@ -62,6 +72,7 @@ while True:
       chief.set_engine_volume(0)
       time.sleep(10)
       chief.set_engine_volume(0)
+      lion_working = True
     except:
       os.system('sudo reboot')
     print ("Sleeping...", flush=True)
