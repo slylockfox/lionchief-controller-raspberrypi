@@ -4,6 +4,7 @@ import datetime
 import logging
 import sys
 import threading
+import os
 
 #This demo class will be split into a common service soon.  This will soon be commandline only interface.
 
@@ -16,7 +17,19 @@ logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 chief = lionchief.LionChief("D0:EC:B7:01:5E:DE") #steam engine
 
 # chief.set_bell_pitch(1)
+
+def watchdog():
+    global lion_working
+    time.sleep(60)
+    if not lion_working:
+        os.system('sudo reboot')
+    print ("Watchdog ending...", flush=True)
+
+lion_working = False
 try:
+    print ("Starting watchdog...", flush=True)
+    dog_thread = threading.Thread(target = watchdog)
+    dog_thread.start()
     chief.connect()
 except Exception as e:
     print(e)
@@ -50,19 +63,8 @@ def sleepUntilTopOfHour():
         future += datetime.timedelta(days=1)
     time.sleep((future-t).total_seconds())
 
-def watchdog():
-    global lion_working
-    time.sleep(60)
-    if not lion_working:
-        os.system('sudo reboot')
-    print ("Watchdog ending...", flush=True)
-
-lion_working = False
 while True:
     try:
-      print ("Starting watchdog...", flush=True)
-      dog_thread = threading.Thread(target = watchdog)
-      dog_thread.start()
       print ("Awake...", flush=True)
       chief.set_engine_volume(8)
       chief.bell(True)
