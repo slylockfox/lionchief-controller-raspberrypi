@@ -22,7 +22,7 @@ class LionChief(object):
     def connect(self):
         print("Bluetooth connecting...", flush=True)
         connected=False
-        maxAttempt=1
+        maxAttempt=3
         i=0
         while(connected==False and i< maxAttempt):
 
@@ -39,8 +39,8 @@ class LionChief(object):
             connected=True
         
         if(connected ==False):
-            #raise bluetooth.NotConnectedError()
-            os.system('sudo reboot')
+            raise bluetooth.NotConnectedError()
+            #os.system('sudo reboot')
 
         print ("Bluetooth connected", flush=True)
 

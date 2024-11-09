@@ -12,10 +12,9 @@ logging.basicConfig()
 logging.getLogger('bluetooth').setLevel(logging.DEBUG)
 # Replace this mac address with the one
 # belonging to your train
-# chief = lionchief.LionChief("44:A6:E5:48:7F:73") #steam engine
-# chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
-# chief = lionchief.LionChief("D0:EC:B7:01:5E:DE") # Marie steam engine
-chief = lionchief.LionChief("18:45:16:98:66:C8") # Matt MKT switcher engine
+#chief = lionchief.LionChief("44:A6:E5:48:7F:73") #steam engine
+#chief = bluetooth.BTLEDevice("44:A6:E5:35:54:88") #GE
+chief = lionchief.LionChief("D0:EC:B7:01:5E:DE") #steam engine
 
 # chief.set_bell_pitch(1)
 
@@ -28,14 +27,13 @@ def watchdog():
 
 lion_working = False
 try:
-    # ~ print ("Starting watchdog...", flush=True)
-    # ~ dog_thread = threading.Thread(target = watchdog)
-    # ~ dog_thread.start()
+    print ("Starting watchdog...", flush=True)
+    dog_thread = threading.Thread(target = watchdog)
+    dog_thread.start()
     chief.connect()
 except Exception as e:
     print(e)
-    #os.system('sudo reboot')
-    
+    os.system('sudo reboot')
 # Gracefully start or stop
 speed=0
 reverse = False
@@ -65,23 +63,23 @@ def sleepUntilTopOfHour():
         future += datetime.timedelta(days=1)
     time.sleep((future-t).total_seconds())
 
-# ~ while True:
-    # ~ try:
-      # ~ print ("Awake...", flush=True)
-      # ~ chief.set_engine_volume(8)
-      # ~ chief.bell(True)
-      # ~ time.sleep(2)
-      # ~ chief.bell(False)
-      # ~ time.sleep(10)
-      # ~ chief.set_engine_volume(0)
-      # ~ time.sleep(10)
-      # ~ chief.set_engine_volume(0)
-      # ~ lion_working = True
-    # ~ except:
-      # ~ os.system('sudo reboot')
-    # ~ print ("Sleeping...", flush=True)
-    # ~ sleepUntilTopOfHour()
-    # ~ #time.sleep(60*60)
+while True:
+    try:
+      print ("Awake...", flush=True)
+      chief.set_engine_volume(8)
+      chief.bell(True)
+      time.sleep(2)
+      chief.bell(False)
+      time.sleep(10)
+      chief.set_engine_volume(0)
+      time.sleep(10)
+      chief.set_engine_volume(0)
+      lion_working = True
+    except:
+      os.system('sudo reboot')
+    print ("Sleeping...", flush=True)
+    sleepUntilTopOfHour()
+    #time.sleep(60*60)
 
 while True:
 
