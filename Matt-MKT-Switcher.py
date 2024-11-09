@@ -56,6 +56,7 @@ def sleepUntilTopOfHour():
     time.sleep((future-t).total_seconds())
 
 chief.set_bell_pitch(1)
+chief.set_reverse(False)
 
 for i in range(1,3):
     try:
