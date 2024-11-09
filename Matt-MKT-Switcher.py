@@ -22,7 +22,7 @@ def watchdog():
     global lion_working
     time.sleep(60)
     if not lion_working:
-        print ("os.system('sudo reboot')")
+        os.system('sudo reboot')
     print ("Watchdog ending...", flush=True)
 
 lion_working = False
@@ -33,7 +33,7 @@ try:
     chief.connect()
 except Exception as e:
     print(e)
-    print ("os.system('sudo reboot')")
+    os.system('sudo reboot')
     
 # Gracefully start or stop
 speed=0
@@ -68,11 +68,12 @@ for i in range(1,3):
       chief.set_engine_volume(0)
       time.sleep(10)
       chief.set_engine_volume(0)
+      chief.set_reverse(True)
       lion_working = True
     except:
       os.system('sudo reboot')
     print ("Sleeping...", flush=True)
     sleepUntilTopOfHour()
 
-
+chief.set_reverse(False)
 
