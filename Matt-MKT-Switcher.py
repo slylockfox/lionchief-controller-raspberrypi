@@ -20,21 +20,20 @@ chief = lionchief.LionChief("18:45:16:98:66:C8") # Matt MKT switcher engine
 
 def watchdog():
     global lion_working
-    time.sleep(60)
+    time.sleep(300) # 5 minutes
     if not lion_working:
         os.system('sudo reboot')
     print ("Watchdog ending...", flush=True)
 
-lion_working = False
-
-try:
-    print ("Starting watchdog...", flush=True)
-    dog_thread = threading.Thread(target = watchdog)
-    dog_thread.start()
-    chief.connect()
-except Exception as e:
-    print(e)
-    os.system('sudo reboot')
+def startWatchdog():
+    lion_working = False
+    try:
+        print ("Starting watchdog...", flush=True)
+        dog_thread = threading.Thread(target = watchdog)
+        dog_thread.start()
+    except Exception as e:
+        print(e)
+        os.system('sudo reboot')
     
 # ~ speed=0
 # ~ reverse = False
@@ -55,31 +54,87 @@ def sleepUntilTopOfHour():
         future += datetime.timedelta(days=1)
     time.sleep((future-t).total_seconds())
 
+def sleepUntilMinute():
+    t = datetime.datetime.today()
+    if t.minute == 59:
+        future_minute = 0
+        future_hour = t.hour+1
+    else:
+        future_minute = t.minute+1
+        future_hour = t.hour
+    future = datetime.datetime(t.year, t.month, t.day, future_hour, future_minute)
+    if t.timestamp() > future.timestamp():
+        future += datetime.timedelta(days=1)
+    time.sleep((future-t).total_seconds())
+
+startWatchdog()
+
+try:
+    chief.connect()
+except Exception as e:
+    print(e)
+    os.system('sudo reboot')
+
 chief.set_bell_pitch(1)
 chief.set_reverse(False)
+chief.set_engine_volume(0)
 
-count = 1
+# ring bell
+chief.bell(True)
+time.sleep(2)
+chief.bell(False)
+
+# count = 1
 while True:
-    if count <= 3:
-        try:
-          print ("Awake...", flush=True)
-          chief.set_engine_volume(8)
-          chief.bell(True)
-          time.sleep(2)
-          chief.bell(False)
-          time.sleep(10)
-          chief.set_engine_volume(0)
-          time.sleep(10)
-          chief.set_engine_volume(0)
-          chief.set_reverse(True)
-          lion_working = True
-          count += 1
-        except:
-          os.system('sudo reboot')
-    else:
-        chief.set_reverse(False) # after 3 hours, put forward headlight back on and be quiet
+    try:
+        
+        print ("Awake...", flush=True)
+
+        # every minute, set reverse, than forward
+        chief.set_reverse(True)
+        time.sleep(2)
+        chief.set_reverse(False)
+        time.sleep(2)
+        chief.set_reverse(True)
+        time.sleep(2)
+        chief.set_reverse(False)
+        time.sleep(2)
+
+        # every hour, ring bell
+        t = datetime.datetime.today()
+        if t.minute == 0:
+            startWatchdog()
+            print ("Sounding bell on the hour...", flush=True)
+            chief.bell(True)
+            time.sleep(2)
+            chief.bell(False)
+    
+    # ~ if count <= 3:
+        # ~ try:
+          # ~ print ("Awake...", flush=True)
+          # ~ chief.set_engine_volume(8)
+          # ~ chief.bell(True)
+          # ~ time.sleep(2)
+          # ~ chief.bell(False)
+          # ~ time.sleep(10)
+          # ~ chief.set_engine_volume(0)
+          # ~ time.sleep(10)
+          # ~ chief.set_engine_volume(0)
+          # ~ chief.set_reverse(True)
+          # ~ lion_working = True
+          # ~ count += 1
+          
+        lion_working = True
+          
+    except:
+        os.system('sudo reboot')
+        
+    # ~ else:
+        # ~ chief.set_reverse(False) # after 3 hours, put forward headlight back on and be quiet
+        
     print ("Sleeping...", flush=True)
-    sleepUntilTopOfHour()
+    # sleepUntilTopOfHour()
+    sleepUntilMinute()
 
 
 
