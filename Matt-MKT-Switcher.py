@@ -67,6 +67,7 @@ def sleepUntilMinute():
     else:
         future_minute = t.minute+1
         future_hour = t.hour
+        future_day = t.day
     future = datetime.datetime(t.year, t.month, future_day, future_hour, future_minute)
     if t.timestamp() > future.timestamp():
         future += datetime.timedelta(days=1)
