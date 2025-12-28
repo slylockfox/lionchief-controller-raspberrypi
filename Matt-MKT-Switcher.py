@@ -58,11 +58,16 @@ def sleepUntilMinute():
     t = datetime.datetime.today()
     if t.minute == 59:
         future_minute = 0
-        future_hour = t.hour+1
+        if t.hour == 23:
+            future_day = t.day + 1
+            future_hour = 0
+        else:
+            future_day = t.day
+            future_hour = t.hour+1
     else:
         future_minute = t.minute+1
         future_hour = t.hour
-    future = datetime.datetime(t.year, t.month, t.day, future_hour, future_minute)
+    future = datetime.datetime(t.year, t.month, future_day, future_hour, future_minute)
     if t.timestamp() > future.timestamp():
         future += datetime.timedelta(days=1)
     time.sleep((future-t).total_seconds())
